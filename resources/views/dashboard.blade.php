@@ -7,15 +7,12 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900 dark:text-gray-100">
-                    {{ __("You're logged in!") }}
-                </div>
+            <div class="dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
 
                 @foreach ($posts as $post)
-                <div class="p-6 text-gray-900 dark:text-gray-100">
-                    <h2>{{ $post->title }}</h2>
-                    <p>{{ $post->content }}</p>
+                <div class="p-6 text-black dark:text-white border border-teal-600 rounded-lg bg-white">
+                    <h2 class="text-xl text-red-600">{{ $post->title }}</h2>
+                    <p class="mt-1 mb-1">{{ $post->content }}</p>
                 </div>
             @endforeach
 
