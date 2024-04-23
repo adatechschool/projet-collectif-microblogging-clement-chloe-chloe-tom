@@ -5,7 +5,7 @@
         </h2>
     </x-slot>
 
-   <form method="POST" action="/posts/create">
+  <form method="POST" action="/posts/create">
       @csrf
         <div class="space-y-12">
           <div class="border-b border-gray-900/10 pb-12">      
@@ -17,15 +17,24 @@
                     <input type="text" name="title" id="title" class="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6" placeholder="Entrez un titre">
                   </div>
                 </div>
+
+                @error('title')
+                <p class="text-xs text-red-500 font-semibold">{{$message}}</p>
+                @enderror
               </div>
+
       
               <div class="col-span-full">
                 <label for="content" class="block text-sm font-medium leading-6 text-gray-900">Contenu</label>
                 <div class="mt-2">
                   <textarea id="content" name="content" rows="3" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="Entrez un contenu"></textarea>
                 </div>
+
+                @error('content')
+                <p class="text-xs text-red-500 font-semibold">{{$message}}</p>
+                @enderror
               </div>
-        
+
               <div class="col-span-full">
                 <label for="picture" class="block text-sm font-medium leading-6 text-gray-900">Photo</label>
                 <div class="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
