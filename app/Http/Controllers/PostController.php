@@ -13,10 +13,11 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::all();
-        return view('blogpost.posts', [
-            'posts' => $posts
-        ]);
+        $data = [
+            'posts' => Post::latest()->get(), // Exemple de récupération de tous les posts
+            // Ajoutez d'autres données ici
+        ];
+        return view('dashboard', $data);
     }
 
     public function showUserPosts($user_id)
@@ -32,7 +33,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('posts.create');
+        return view('blogpost.create');
     }
 
     /**
@@ -40,18 +41,25 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'title' => 'required|max:255',
-            'content' => 'required',
+        // $request->validate([
+        //     'title' => ['required', 'string','max:255'],
+        //     'content' => ['required', 'string', 'max:255'],
+        //     // 'picture' => ['required', 'file', 'mimes:jpg,png,gif', 'max:3072'],
+        // ]);
+
+        // $picturePath = $request->file('picture')->storePublicly('picture');
+        
+        Post::create([
+            'title'=> $request->title,
+            'content'=> $request->content,
+            'user_id' => 1
+            // 'title'=> $request->title,
+            // 'content'=> $request->content,
+            // 'picture'=> $picturePath,
+            // 'user_id'=> Auth::user()->id
         ]);
-    
-        $post = new Post;
-        $post->title = $request->title;
-        $post->content = $request->content;
-        $post->user_id = auth()->id(); // Associe le post à l'utilisateur actuellement connecté
-        $post->save();
-    
-        return redirect()->route('posts.index')->with('success', 'Post créé avec succès');
+
+        return redirect('/dashboard');
     }
 
     /**
