@@ -44,7 +44,7 @@ class PostController extends Controller
         $request->validate([
             'title' => ['required', 'string','max:255'],
             'content' => ['required', 'string', 'max:255'],
-            // 'picture' => ['required', 'file', 'mimes:jpg,png,gif', 'max:3072'],
+            'picture' => ['required', 'file', 'mimes:jpg,png,gif', 'max:3072'],
         ]);
 
         // $picturePath = $request->file('picture')->storePublicly('picture');

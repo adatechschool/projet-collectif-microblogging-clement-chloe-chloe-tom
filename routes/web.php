@@ -28,13 +28,13 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     
-    Route::get('/posts/create', [PostController::class,'create'])->name('posts.create');
-    Route::post('/posts/create', [PostController::class,'store'])->name('posts.store');
-    // Route::post('/posts/create', function() {
-    //     dd(request('title'));
-    // });
-    Route::get('/posts', [PostController::class,'index'])->name('posts');
-    Route::get('/posts/{post}', [PostController::class,'show'])->name('posts.show');
+    Route::controller(PostController::class)->group(function() {
+        Route::get('/posts/create', 'create')->name('posts.create');
+        Route::post('/posts/create', 'store')->name('posts.store');
+        Route::get('/posts', 'index')->name('posts');
+        Route::get('/posts/{post}', 'show')->name('posts.show');
+        Route::get('/user/{user_id}/posts', 'showUserPosts')->name('user.show');
+    });
     
 });
 
