@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -14,16 +15,24 @@ class PostController extends Controller
     {
         $posts = Post::all();
         return view('blogpost.posts', [
-            'posts'=> $posts
+            'posts' => $posts
         ]);
     }
+
+    public function showUserPosts($user_id)
+    {
+        $posts = Post::where('user_id', $user_id)->get();
+        $userName = User::find($user_id)->name; // Récupère le nom de l'utilisateur
+        return view('user_posts', ['posts' => $posts, 'userName' => $userName]);
+    }
+    
 
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        //
+        return view('posts.create');
     }
 
     /**
@@ -31,7 +40,18 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'title' => 'required|max:255',
+            'content' => 'required',
+        ]);
+    
+        $post = new Post;
+        $post->title = $request->title;
+        $post->content = $request->content;
+        $post->user_id = auth()->id(); // Associe le post à l'utilisateur actuellement connecté
+        $post->save();
+    
+        return redirect()->route('posts.index')->with('success', 'Post créé avec succès');
     }
 
     /**
