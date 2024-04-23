@@ -23,7 +23,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        return view('blogpost.create');
     }
 
     /**
@@ -31,7 +31,22 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'title' => ['required', 'string','max:255'],
+            'content' => ['required', 'string', 'max:255'],
+            // 'picture' => ['required', 'file', 'mimes:jpg,png,gif', 'max:3072'],
+        ]);
+
+        // $picturePath = $request->file('picture')->storePublicly('picture');
+        
+        $newPost = Post::create([
+            'title'=> $request->title,
+            'content'=> $request->content,
+            // 'picture'=> $picturePath,
+            // 'user_id'=> Auth::user()->id
+        ]);
+
+        return redirect('');
     }
 
     /**
