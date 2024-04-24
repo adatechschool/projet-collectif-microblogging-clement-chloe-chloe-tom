@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -44,17 +45,16 @@ class PostController extends Controller
         $request->validate([
             'title' => ['required', 'string','max:255'],
             'content' => ['required', 'string', 'max:255'],
-            'picture' => ['required', 'file', 'mimes:jpg,png,gif', 'max:3072'],
+            'picture' => ['file', 'mimes:jpg,png,gif', 'max:3072000'],
         ]);
 
-        // $picturePath = $request->file('picture')->storePublicly('picture');
+        $picturePath = $request->file('picture')->storePublicly('pictures');
         
         Post::create([
             'title'=> $request->title,
             'content'=> $request->content,
-            // 'picture'=> $picturePath,
-            'user_id' => 1
-            // 'user_id'=> Auth::user()->id
+            'picture'=> $picturePath,
+            'user_id'=> Auth::user()->id,
         ]);
 
         return redirect('/dashboard');

@@ -5,7 +5,7 @@
         </h2>
     </x-slot>
 
-  <form method="POST" action="/posts/create">
+  <form method="POST" action="/posts/create" enctype="multipart/form-data">
       @csrf
         <div class="space-y-12">
           <div class="border-b border-gray-900/10 pb-12">      
@@ -52,6 +52,12 @@
                     <p class="text-xs leading-5 text-gray-600">PNG, JPG, GIF up to 10MB</p>
                   </div>
                 </div>
+
+                {{-- <x-picture-input/> --}}
+
+                @error('picture')
+                <p class="text-xs text-red-500 font-semibold">{{$message}}</p>
+                @enderror
               </div>
             </div>
           </div>
