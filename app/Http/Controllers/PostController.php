@@ -48,7 +48,7 @@ class PostController extends Controller
             'picture' => ['file', 'mimes:jpg,png,gif', 'max:3072000'],
         ]);
 
-        $picturePath = $request->file('picture')->storePublicly('pictures');
+        $picturePath = $request->file('picture')->storePublicly('public');
         
         Post::create([
             'title'=> $request->title,
