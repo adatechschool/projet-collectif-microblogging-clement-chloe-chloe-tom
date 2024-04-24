@@ -15,7 +15,7 @@ class PostController extends Controller
     public function index()
     {
         $data = [
-            'posts' => Post::latest()->get(), // Exemple de récupération de tous les posts
+            'posts' => Post::latest()->get() // Exemple de récupération de tous les posts
             // Ajoutez d'autres données ici
         ];
         return view('dashboard', $data);
@@ -23,7 +23,7 @@ class PostController extends Controller
 
     public function showUserPosts($user_id)
     {
-        $posts = Post::where('user_id', $user_id)->get();
+        $posts = Post::where('user_id', $user_id)->latest()->get();
         $userName = User::find($user_id)->name; // Récupère le nom de l'utilisateur
         return view('user_posts', ['posts' => $posts, 'userName' => $userName]);
     }

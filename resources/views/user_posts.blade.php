@@ -24,6 +24,7 @@
                 <a href="/posts/{{$post->id}}" class="block p-6 bg-slate-300 border border-blue-200 rounded-lg shadow transition-transform transform hover:scale-105 hover:bg-indigo-200 hover:border-4 hover:border-blue-500 transition-all duration-200">
                     <h3 class="text-xl font-semibold hover:text-blue-800">{{$post->title}}</h3>
                     <p class="text-gray-600 mt-4">{{$post->content}}</p>
+                    <img class="mt-1 mb-1" src="{{env('IMG_PATH')}}{{Storage::url($post->picture)}}">
                     <p class="text-gray-400 mb-6 text-xs italic ">Posté par: {{$post->user->name}}</p> <!-- Ajout du nom de l'utilisateur -->
                 </a>
                 <div class="flex justify-center mt-10">
