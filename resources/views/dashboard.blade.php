@@ -14,8 +14,7 @@
                     <a href="{{ route('posts.show', $post->id) }}" class="block">
                         <h2 class="text-xl text-blue-600">{{ $post->title }}</h2>
                         <p class="mt-1 mb-1">{{ $post->content }}</p>
-                        <p class="mt-1 mb-1">{{ $post->picture }}</p>
-                        <img class="mt-1 mb-1" src="">
+                        <img src="{{ $post->picture }}" alt="Image du post" class="mt-1 mb-1">
                     </a>
                     <p class="text-sm text-gray-500">Par <a href="{{ route('user.show', $post->user->id) }}" class="text-blue-500 hover:underline">{{ $post->user->name }}</a></p>
                 </div>
