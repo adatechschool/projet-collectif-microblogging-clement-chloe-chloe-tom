@@ -12,6 +12,7 @@
     <p class="text-2xl font-bold text-gray-800 mb-4">{{$post->title}}</p>
     <p class="text-gray-600 mb-6">{{$post->content}}</p>
     <p class="text-gray-600 mb-6">Posté par: <a href="{{ route('user.show', ['user_id' => $post->user->id]) }}" class="text-blue-500 hover:text-blue-700">{{$post->user->name}}</a></p>
+    <img class="mt-1 mb-1" src="{{env('IMG_PATH')}}{{Storage::url($post->picture)}}">
 </div>
 <div class="flex justify-center mt-4">
     <a href="/posts" class="inline-block px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-700 hover:scale-105">Retourner au Dashboard</a>
